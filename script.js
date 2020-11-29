@@ -56,6 +56,7 @@ let jane = Object.create(personProto,{
  
  // Primitives vs objects
 
+ /*
 let a = 23;
 let b = a;
 a = 46;
@@ -70,3 +71,114 @@ let obj2 = obj1;
 obj1.age = 30;
 console.log (obj1.age); //30
 console.log (obj2.age); //30
+
+///// Passiing functions
+
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc(arr, fn){
+    var arrRes = [];
+    for (var i = 0; i < arr.length; i++){
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
+
+function calculateAge(el) {
+    return 2016 - el;
+}
+
+function isFullAge(el){
+    return el >= 18;
+}
+
+function maxHeartRate(el){
+    if (el >= 18 && el <= 81){
+        
+        return Math.round(206.9 - (0.67 * el));
+    } else {
+        return -1;
+    }
+
+
+}
+
+var ages = arrayCalc(years, calculateAge);
+var fullAges = arrayCalc(ages, isFullAge);
+var rates = arrayCalc(ages, maxHeartRate);
+
+console.log(ages);
+console.log(fullAges);
+console.log(rates);
+*/
+
+///interview
+/*
+function interviewQuestion(job){
+    if (job == 'designer'){
+        return function(name){
+            console.log(name + ', can you please explain what UX design is?');
+        }
+    } else if (job == 'teacher') {
+        return function(name) {
+            console.log('What subjet do you teach, ' + name + '?');
+        }
+    } else {
+        return function(name){
+            console.log('Hello ' + name + ', what do you do?');
+        }
+    }
+}
+
+var teacherQuestion = interviewQuestion('teacher');
+let designerQuestion = interviewQuestion('designer');
+
+teacherQuestion('John')
+designerQuestion('Johhn');
+
+interviewQuestion('teacher')('Mark');
+
+*/
+
+// IIFE
+/*
+function game(){
+    let score = Math.random() * 10;
+    console.log(score >= 5);
+}
+game();
+*/
+
+/*
+(function (){
+    let score = Math.random() * 10;
+    console.log(score >= 5);
+})();
+
+(function (goodLuck){
+    let score = Math.random() * 10;
+    console.log(score >= 5 - goodLuck);
+})(5);
+*/
+
+//retire
+
+function retirement(retirementAge) {
+     var a = ' years left until retirement.';
+     return function(yearOfBirth){
+         var age = 2020 - yearOfBirth;
+         console.log((retirementAge - age) + a);
+     }
+}
+
+var retirementUS = retirement(66);
+var retirementD = retirement(65);
+var retirementIZ= retirement(67);
+
+retirementUS(1993);
+retirementD(1993);
+retirementIZ(1993);
+
+retirement(66)(1993);
+
+
