@@ -162,7 +162,7 @@ game();
 */
 
 //retire
-
+/*
 function retirement(retirementAge) {
      var a = ' years left until retirement.';
      return function(yearOfBirth){
@@ -180,5 +180,61 @@ retirementD(1993);
 retirementIZ(1993);
 
 retirement(66)(1993);
+*/
 
+/////////////
+// Bind, call and apply
 
+/*
+var john = {
+    name: "John",
+    age: 26,
+    job: 'teacher',
+    presentation: function(style, timeOfDay){
+        if (style === 'formal') {
+            console.log('Good ' + timeOfDay + ', Ladies and Gentlemen! I\'m ' + this.name + ', I\'m a ' + this.job + 'and I\'m ' + this.age + ' years old.' );
+        } else if (style === 'friendly') {
+            console.log('Hey! What\'s up? I\'m ' + this.name + ', I\'m a ' + this.job + 'and I\'m ' + this.age + ' years old. Have a nice ' + timeOfDay + '.' );
+        }
+    }
+};
+
+var emily = {
+    name: 'Emily',
+    age: 35,
+    job: 'designer',
+};
+
+john.presentation('formal', 'morning');
+
+john.presentation.call(emily, 'friendly', 'afternoon');
+
+//john.presentation.apply(emily, ['frienly'])
+
+var johnFriendly = john.presentation.bind(john, 'friendly');
+
+johnFriendly('morning');
+johnFriendly('night');
+
+var emilyFormal = john.presentation.bind(emily, 'formal');
+emilyFormal('afternoon');
+
+*/
+
+////////////
+//  CODING CHALLENGE
+
+var Question = function(q, answers, correctAnswer) {
+    this.q = q;
+    this.answers = answers;
+    this.correctAnswer = correctAnswer;
+}
+
+var eyes = new Question('What color are my eyes?', ['green','blue','brown'], 2);
+var whatname = new Question('What is my name?', ['Jack', 'Pistyu', 'Jano', 'Ali'], 3);
+var language = new Question('What programming language is this?', ['C++', 'JS', 'PHP', 'GO'], 1);
+
+var allQuestions = [eyes, whatname, language];
+var randomQuestion = Math.floor(Math.random() * allQuestions.length)
+
+console.log(allQuestions[randomQuestion]);
