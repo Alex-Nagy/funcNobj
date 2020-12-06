@@ -224,17 +224,42 @@ emilyFormal('afternoon');
 ////////////
 //  CODING CHALLENGE
 
-var Question = function(q, answers, correctAnswer) {
-    this.q = q;
-    this.answers = answers;
-    this.correctAnswer = correctAnswer;
-}
+(function() {
+    var Question = function(q, answers, correctAnswer) {
+        this.q = q;
+        this.answers = answers;
+        this.correctAnswer = correctAnswer;
+    }
+    
+    Question.prototype.diplayQuestion = function() {
+        console.log(this.q);
+    
+        for (i = 0; i < this.answers.length; i++) {
+            console.log(i + ": " + this.answers[i]);
+        }
+    }
+    
+    Question.prototype.checkAnswer = function(ans) {
+        if (ans == this.correctAnswer){
+            console.log("That's right bruh!")
+        } else {
+            console.log("Ain't it bruh. Try again")
+        }
+    }
+    
+    //Question.prototype.displayQuestion 
+    
+    var eyes = new Question('What color are my eyes?', ['green','blue','brown'], 2);
+    var whatname = new Question('What is my name?', ['Jack', 'Pistyu', 'Jano', 'Ali'], 3);
+    var language = new Question('What programming language is this?', ['C++', 'JS', 'PHP', 'GO'], 1);
+    
+    var allQuestions = [eyes, whatname, language];
+    var randomQuestion = Math.floor(Math.random() * allQuestions.length)
+    
+    allQuestions[randomQuestion].diplayQuestion();
+    
+    var answer = prompt("Type in the correct answer bruh");
+    
+    allQuestions[randomQuestion].checkAnswer(answer);
+})();
 
-var eyes = new Question('What color are my eyes?', ['green','blue','brown'], 2);
-var whatname = new Question('What is my name?', ['Jack', 'Pistyu', 'Jano', 'Ali'], 3);
-var language = new Question('What programming language is this?', ['C++', 'JS', 'PHP', 'GO'], 1);
-
-var allQuestions = [eyes, whatname, language];
-var randomQuestion = Math.floor(Math.random() * allQuestions.length)
-
-console.log(allQuestions[randomQuestion]);
