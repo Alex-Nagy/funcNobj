@@ -239,12 +239,24 @@ emilyFormal('afternoon');
         }
     }
     
-    Question.prototype.checkAnswer = function(ans) {
+    Question.prototype.checkAnswer = function(ans, callback) {
+        let sc;
+
         if (ans == this.correctAnswer){
             console.log("That's right bruh!")
+            sc = callback(true);
         } else {
             console.log("Ain't it bruh. Try again")
+
+            sc = callback(false);
         }
+
+        this.displayScore(sc);
+    }
+
+    Question.prototype.displayScore = function(score) { 
+        console.log('Your current score is: ' + score);
+        console.log('-------------------------------')
     }
     
     var eyes = new Question('What color are my eyes?', ['green','blue','brown'], 2);
@@ -256,6 +268,18 @@ emilyFormal('afternoon');
 
     // Expert level
 
+    function score() {
+        let sc = 0;
+        return function(correct) {
+            if (correct){
+                sc++;
+            }
+            return sc;
+        }
+    }
+
+    var keepScore = score();
+
     function nextQuestion() {
         var randomQuestion = Math.floor(Math.random() * allQuestions.length)
         
@@ -265,7 +289,7 @@ emilyFormal('afternoon');
          
         if(answer !== "exit") {
             
-            allQuestions[randomQuestion].checkAnswer(answer);    
+            allQuestions[randomQuestion].checkAnswer(answer, keepScore);    
             
             nextQuestion();
 
@@ -273,6 +297,5 @@ emilyFormal('afternoon');
     }
 
     nextQuestion();
-    
-    
+
 })();
