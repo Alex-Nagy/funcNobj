@@ -247,19 +247,32 @@ emilyFormal('afternoon');
         }
     }
     
-    //Question.prototype.displayQuestion 
-    
     var eyes = new Question('What color are my eyes?', ['green','blue','brown'], 2);
     var whatname = new Question('What is my name?', ['Jack', 'Pistyu', 'Jano', 'Ali'], 3);
     var language = new Question('What programming language is this?', ['C++', 'JS', 'PHP', 'GO'], 1);
     
     var allQuestions = [eyes, whatname, language];
-    var randomQuestion = Math.floor(Math.random() * allQuestions.length)
-    
-    allQuestions[randomQuestion].diplayQuestion();
-    
-    var answer = prompt("Type in the correct answer bruh");
-    
-    allQuestions[randomQuestion].checkAnswer(answer);
-})();
+   
 
+    // Expert level
+
+    function nextQuestion() {
+        var randomQuestion = Math.floor(Math.random() * allQuestions.length)
+        
+        allQuestions[randomQuestion].diplayQuestion();
+        
+        var answer = prompt("Type in the correct answer bruh");
+         
+        if(answer !== "exit") {
+            
+            allQuestions[randomQuestion].checkAnswer(answer);    
+            
+            nextQuestion();
+
+            }
+    }
+
+    nextQuestion();
+    
+    
+})();
